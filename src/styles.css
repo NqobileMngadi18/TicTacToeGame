@@ -1,0 +1,102 @@
+/* In your CSS file or global styles */
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+#root, /* or the div where your React app mounts */
+.tictactoe-wrapper {
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;     /* vertical centering */
+  height: 100vh;           /* full viewport height */
+  background-color: #f9f9f9; /* optional: nice background */
+}
+
+.tictactoe-container {
+  max-width: 280px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.status {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.square {
+  width: 80px;
+  height: 80px;
+  font-size: 2.5rem;
+  background-color: #fff;
+  border: 3px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.square:hover:not(:disabled) {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.square:disabled {
+  cursor: default;
+  color: #999;
+}
+
+.reset-button {
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #292626;
+}
+
+/* Animation for X and O */
+
+.square.x {
+  color: #1e90ff;
+  animation: pop-in 0.3s ease forwards;
+}
+
+.square.o {
+  color: #ff6347;
+  animation: pop-in 0.3s ease forwards;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
