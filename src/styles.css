@@ -1,99 +1,165 @@
-/* In your CSS file or global styles */
-
+/* Background */
 body, html {
   height: 100%;
   margin: 0;
-  background-image: url('assets/background-image.webp');
-  background-size: cover;     
-  background-position: center;  
-  background-repeat: no-repeat; 
-}
-
-#root, /* or the div where your React app mounts */
-.tictactoe-wrapper {
-  display: flex;
-  justify-content: center; /* horizontal centering */
-  align-items: center;     /* vertical centering */
-  height: 100vh;           /* full viewport height */
-  background-color: #f9f9f9; /* optional: nice background */
-}
-
-.tictactoe-container {
-  max-width: 280px;
-  margin: 0 auto;
-  text-align: center;
+  background: url("./assets/background-image.webp") no-repeat center center fixed;
+  background-size: cover;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.status {
-  font-size: 1.2rem;
+/* Game Title */
+.game-title {
+  font-size: 2rem;
   margin-bottom: 15px;
-  font-weight: 600;
-  color: #333;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff512f, #dd2476, #24c6dc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4);
+  animation: glow 2s infinite alternate;
 }
 
+/* Title glow effect */
+@keyframes glow {
+  from {
+    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
+  }
+  to {
+    text-shadow: 0px 0px 18px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Difficulty Selector */
+.difficulty-wrapper {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.difficulty-wrapper label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 8px;
+  color: #fff;
+}
+
+.difficulty-selector {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #24c6dc, #514a9d);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.difficulty-selector:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+}
+
+.difficulty-selector:focus {
+  box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* Centering */
+#root, .tictactoe-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  backdrop-filter: blur(5px); /* smooth blur for readability */
+}
+
+/* Container */
+.tictactoe-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+  max-width: 320px;
+  width: 100%;
+}
+
+/* Status */
+.status {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+}
+
+/* Board */
 .board {
   display: grid;
-  grid-template-columns: repeat(3, 80px);
-  gap: 10px;
+  grid-template-columns: repeat(3, 90px);
+  gap: 12px;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
+/* Square buttons */
 .square {
-  width: 80px;
-  height: 80px;
-  font-size: 2.5rem;
-  background-color: #fff;
-  border: 3px solid #333;
-  border-radius: 8px;
+  width: 90px;
+  height: 90px;
+  font-size: 2.8rem;
+  border: none;
+  border-radius: 15px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.15s ease;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  user-select: none;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
 
 .square:hover:not(:disabled) {
-  background-color: #f0f0f0;
   transform: scale(1.1);
+  background: linear-gradient(135deg, #ffe259, #ffa751);
 }
 
 .square:disabled {
-  cursor: default;
-  color: #999;
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
+/* Reset button */
 .reset-button {
-  padding: 10px 25px;
+  padding: 12px 25px;
   font-size: 1rem;
   border: none;
-  background-color: #333;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-  transition: background-color 0.3s ease;
+  box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
 .reset-button:hover {
-  background-color: #292626;
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #6b73ff, #000dff);
 }
 
-/* Animation for X and O */
-
+/* X and O */
 .square.x {
-  color: #1e90ff;
+  color: #00c6ff;
+  text-shadow: 0px 0px 10px rgba(0,198,255,0.7);
   animation: pop-in 0.3s ease forwards;
 }
 
 .square.o {
-  color: #ff6347;
+  color: #ff4b2b;
+  text-shadow: 0px 0px 10px rgba(255,75,43,0.7);
   animation: pop-in 0.3s ease forwards;
 }
 
+/* Animations */
 @keyframes pop-in {
   0% {
     transform: scale(0);
